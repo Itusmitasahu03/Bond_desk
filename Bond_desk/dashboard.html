@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bond_Desk | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="dashboard-navbar">
+
+    <div class="dashboard-logo">
+
+        <i class="fas fa-hotel"></i>
+
+        Bond_<span>Desk</span>
+
+    </div>
+
+    <div class="dashboard-nav-links">
+
+        <a href="index.html">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+
+        <a href="#hotels">
+            <i class="fas fa-hotel"></i>
+            Hotels
+        </a>
+
+        <a href="#bookings">
+            <i class="fas fa-calendar-check"></i>
+            My Bookings
+        </a>
+
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            Profile
+        </a>
+
+        <a href="login.html"
+           class="logout-btn"
+           onclick="logoutCustomer()">
+
+            <i class="fas fa-sign-out-alt"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="dashboard-hero">
+
+    <div class="dashboard-hero-overlay">
+
+        <div class="dashboard-hero-content">
+
+            <p class="hero-small-title">
+                FIND YOUR PERFECT STAY
+            </p>
+
+            <h1>
+                Where do you want<br>
+                to stay?
+            </h1>
+
+            <p>
+                Search hotels, resorts and comfortable stays
+                anywhere you want.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH BOX -->
+
+        <div class="dashboard-search-box">
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fas fa-location-dot"></i>
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="dashboardLocation"
+                    placeholder="Enter city or area">
+
+            </div>
+
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fas fa-calendar"></i>
+                    Check-in
+                </label>
+
+                <input
+                    type="date"
+                    id="dashboardCheckIn">
+
+            </div>
+
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fas fa-calendar"></i>
+                    Check-out
+                </label>
+
+                <input
+                    type="date"
+                    id="dashboardCheckOut">
+
+            </div>
+
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fas fa-users"></i>
+                    Guests
+                </label>
+
+                <select id="dashboardGuests">
+
+                    <option value="1">
+                        1 Guest
+                    </option>
+
+                    <option value="2" selected>
+                        2 Guests
+                    </option>
+
+                    <option value="3">
+                        3 Guests
+                    </option>
+
+                    <option value="4">
+                        4 Guests
+                    </option>
+
+                    <option value="5">
+                        5+ Guests
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="dashboard-search-btn"
+                onclick="searchDashboardHotels()">
+
+                <i class="fas fa-search"></i>
+
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOTELS ================= -->
+
+<section
+    class="dashboard-hotels"
+    id="hotels">
+
+    <div class="container">
+
+        <div class="dashboard-section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    AVAILABLE STAYS
+                </p>
+
+                <h2>
+                    Hotels & Stays
+                </h2>
+
+                <p>
+                    Find bookable Bond_Desk hotels and nearby stays.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- DATABASE HOTELS -->
+
+        <div
+            id="bondDeskHeading"
+            style="display:none; margin-bottom:20px;">
+
+            <h3>
+
+                <i class="fas fa-hotel"></i>
+
+                Bond_Desk Hotels
+
+            </h3>
+
+            <p>
+                These hotels can be booked directly through Bond_Desk.
+            </p>
+
+        </div>
+
+
+        <div
+            id="hotelResults"
+            class="hotel-grid">
+
+            <div class="initial-message">
+
+                <i class="fas fa-hotel"></i>
+
+                <h3>
+                    Find your perfect hotel
+                </h3>
+
+                <p>
+                    Enter a location above and click Search.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXTERNAL HOTELS -->
+
+        <div
+            id="externalHeading"
+            style="display:none; margin-top:45px; margin-bottom:20px;">
+
+            <h3>
+
+                <i class="fas fa-map-location-dot"></i>
+
+                Nearby Hotels
+
+            </h3>
+
+            <p>
+                These are external listings found near your search location.
+            </p>
+
+        </div>
+
+
+        <div
+            id="externalResults"
+            class="hotel-grid">
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            id="noResults"
+            class="no-results"
+            style="display:none;">
+
+            <i class="fas fa-map-marker-alt"></i>
+
+            <h3>
+                No hotels found
+            </h3>
+
+            <p>
+                Try searching for another city or area.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MY BOOKINGS ================= -->
+
+<section
+    class="dashboard-bookings"
+    id="bookings">
+
+    <div class="container">
+
+        <div class="dashboard-section-heading">
+
+            <p class="section-label">
+                YOUR TRIPS
+            </p>
+
+            <h2>
+                My Bookings
+            </h2>
+
+            <p>
+                View your confirmed Bond_Desk hotel bookings.
+            </p>
+
+        </div>
+
+
+        <!-- BOOKINGS -->
+
+        <div id="bookingsList">
+
+            <div class="empty-bookings">
+
+                <i class="fas fa-spinner fa-spin"></i>
+
+                <h3>
+                    Loading your bookings...
+                </h3>
+
+                <p>
+                    Please wait while we load your bookings.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section
+    class="dashboard-profile"
+    id="profile">
+
+    <div class="container">
+
+        <div class="profile-card">
+
+            <div class="profile-icon">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+            <div>
+
+                <p class="section-label">
+                    ACCOUNT
+                </p>
+
+                <h2>
+                    My Profile
+                </h2>
+
+                <p>
+                    Manage your Bond_Desk account and preferences.
+                </p>
+
+                <p id="loggedInEmail"
+                   style="font-weight:600;">
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="dashboard-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>
+
+                    <i class="fas fa-hotel"></i>
+
+                    Bond_Desk
+
+                </h3>
+
+                <p>
+                    Your trusted platform for comfortable stays
+                    anywhere.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="#hotels">
+                    Hotels
+                </a>
+
+                <a href="#bookings">
+                    My Bookings
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Support
+                </h4>
+
+                <a href="#">
+                    Help Center
+                </a>
+
+                <a href="#">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Bond_Desk. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* ============================================================
+   CUSTOMER LOGIN CHECK
+============================================================ */
+
+const loggedIn =
+    localStorage.getItem("bondDeskLoggedIn");
+
+const customerEmail =
+    localStorage.getItem("bondDeskCustomerEmail");
+
+
+if (
+    loggedIn !== "true" ||
+    !customerEmail
+) {
+
+    alert("Please login to access your dashboard.");
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ============================================================
+   DISPLAY LOGGED-IN EMAIL
+============================================================ */
+
+const loggedInEmailElement =
+    document.getElementById("loggedInEmail");
+
+
+if (loggedInEmailElement) {
+
+    loggedInEmailElement.innerHTML = `
+        <i class="fas fa-envelope"></i>
+        ${customerEmail}
+    `;
+
+}
+
+
+/* ============================================================
+   SEARCH HOTELS
+============================================================ */
+
+async function searchDashboardHotels() {
+
+    const locationInput =
+        document.getElementById("dashboardLocation");
+
+    const checkIn =
+        document.getElementById("dashboardCheckIn").value;
+
+    const checkOut =
+        document.getElementById("dashboardCheckOut").value;
+
+    const guests =
+        document.getElementById("dashboardGuests").value;
+
+    const location =
+        locationInput.value.trim();
+
+
+    /* ================= VALIDATION ================= */
+
+    if (location === "") {
+
+        alert("Please enter a location.");
+
+        locationInput.focus();
+
+        return;
+
+    }
+
+
+    if (checkIn && checkOut) {
+
+        if (checkOut <= checkIn) {
+
+            alert("Check-out must be after check-in.");
+
+            return;
+
+        }
+
+    }
+
+
+    const hotelContainer =
+        document.getElementById("hotelResults");
+
+    const externalContainer =
+        document.getElementById("externalResults");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    const bondDeskHeading =
+        document.getElementById("bondDeskHeading");
+
+    const externalHeading =
+        document.getElementById("externalHeading");
+
+
+    /* ================= LOADING ================= */
+
+    hotelContainer.innerHTML = `
+
+        <div class="loading-message">
+
+            <i class="fas fa-spinner fa-spin"></i>
+
+            <p>
+                Searching hotels...
+            </p>
+
+        </div>
+
+    `;
+
+    externalContainer.innerHTML = "";
+
+    noResults.style.display = "none";
+
+    bondDeskHeading.style.display = "none";
+
+    externalHeading.style.display = "none";
+
+
+    try {
+
+        /* ================= API URL ================= */
+
+        let apiUrl =
+            "http://127.0.0.1:8000/api/search-anywhere/?location="
+            + encodeURIComponent(location);
+
+
+        if (checkIn) {
+
+            apiUrl +=
+                "&check_in="
+                + encodeURIComponent(checkIn);
+
+        }
+
+
+        if (checkOut) {
+
+            apiUrl +=
+                "&check_out="
+                + encodeURIComponent(checkOut);
+
+        }
+
+
+        const response =
+            await fetch(apiUrl);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to connect to Django API."
+            );
+
+        }
+
+
+        const hotels =
+            await response.json();
+
+
+        /* ================= CLEAR RESULTS ================= */
+
+        hotelContainer.innerHTML = "";
+
+        externalContainer.innerHTML = "";
+
+
+        if (
+            !Array.isArray(hotels) ||
+            hotels.length === 0
+        ) {
+
+            noResults.style.display = "block";
+
+            return;
+
+        }
+
+
+        /* ================= SEPARATE RESULTS ================= */
+
+        const bondDeskHotels =
+            hotels.filter(
+                hotel =>
+                    hotel.source === "bond_desk"
+            );
+
+
+        const externalHotels =
+            hotels.filter(
+                hotel =>
+                    hotel.source !== "bond_desk"
+            );
+
+
+        /* =====================================================
+           BOND_DESK HOTELS
+        ===================================================== */
+
+        if (bondDeskHotels.length > 0) {
+
+            bondDeskHeading.style.display = "block";
+
+
+            bondDeskHotels.forEach(function(hotel) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "hotel-result";
+
+
+                let availabilityHTML = "";
+
+                let buttonHTML = "";
+
+
+                /* ================= AVAILABLE ================= */
+
+                if (
+                    hotel.bookable === true &&
+                    hotel.available_rooms > 0
+                ) {
+
+                    availabilityHTML = `
+
+                        <div
+                            class="hotel-availability"
+                            style="color:#198754;">
+
+                            <i class="fas fa-circle-check"></i>
+
+                            ${hotel.available_rooms}
+                            room(s) available
+
+                        </div>
+
+                    `;
+
+
+                    const bookingUrl =
+                        "booking.html?id="
+                        + encodeURIComponent(hotel.id)
+                        + "&check_in="
+                        + encodeURIComponent(checkIn)
+                        + "&check_out="
+                        + encodeURIComponent(checkOut);
+
+
+                    buttonHTML = `
+
+                        <button
+                            class="book-btn"
+                            onclick='openBooking("${bookingUrl}")'>
+
+                            View & Book
+
+                        </button>
+
+                    `;
+
+                }
+
+
+                /* ================= NOT AVAILABLE ================= */
+
+                else {
+
+                    availabilityHTML = `
+
+                        <div
+                            class="hotel-availability"
+                            style="color:#dc3545;">
+
+                            <i class="fas fa-circle-xmark"></i>
+
+                            No rooms available
+                            for selected dates
+
+                        </div>
+
+                    `;
+
+
+                    buttonHTML = `
+
+                        <button
+                            class="book-btn"
+                            disabled
+                            style="opacity:0.5; cursor:not-allowed;">
+
+                            Not Available
+
+                        </button>
+
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <div class="hotel-image-container">
+
+                        <img
+                            src="${hotel.image_url}"
+                            alt="${hotel.name}"
+                            onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80'">
+
+                        <div class="hotel-rating">
+
+                            <i class="fas fa-star"></i>
+
+                            ${hotel.rating || "N/A"}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hotel-result-content">
+
+
+                        <div
+                            style="
+                                display:inline-block;
+                                background:#e8f5e9;
+                                color:#198754;
+                                padding:5px 10px;
+                                border-radius:20px;
+                                font-size:12px;
+                                font-weight:600;
+                                margin-bottom:10px;
+                            ">
+
+                            <i class="fas fa-check-circle"></i>
+
+                            BOOKABLE ON BOND_DESK
+
+                        </div>
+
+
+                        <h3>
+                            ${hotel.name}
+                        </h3>
+
+
+                        <p class="hotel-location">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            ${hotel.location}
+
+                        </p>
+
+
+                        <p class="hotel-description">
+
+                            ${
+                                hotel.description ||
+                                "Comfortable stay with modern facilities."
+                            }
+
+                        </p>
+
+
+                        <div class="hotel-amenities">
+
+                            <span>
+
+                                <i class="fas fa-star"></i>
+
+                                ${
+                                    hotel.rating ||
+                                    "Not rated"
+                                }
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fas fa-door-open"></i>
+
+                                ${
+                                    hotel.total_rooms ||
+                                    0
+                                }
+
+                                total rooms
+
+                            </span>
+
+                        </div>
+
+
+                        ${availabilityHTML}
+
+
+                        <div class="hotel-bottom">
+
+                            <div class="hotel-price">
+
+                                <strong>
+                                    ₹${hotel.price}
+                                </strong>
+
+                                <span>
+                                    / night
+                                </span>
+
+                            </div>
+
+
+                            ${buttonHTML}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                hotelContainer.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =====================================================
+           EXTERNAL HOTELS
+        ===================================================== */
+
+        if (externalHotels.length > 0) {
+
+            externalHeading.style.display = "block";
+
+
+            externalHotels.forEach(function(hotel) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "hotel-result";
+
+
+                const mapUrl =
+                    hotel.map_url || "#";
+
+
+                card.innerHTML = `
+
+                    <div class="hotel-image-container">
+
+                        <img
+                            src="${hotel.image_url}"
+                            alt="${hotel.name}"
+                            onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80'">
+
+                    </div>
+
+
+                    <div class="hotel-result-content">
+
+
+                        <div
+                            style="
+                                display:inline-block;
+                                background:#eef4ff;
+                                color:#315b9a;
+                                padding:5px 10px;
+                                border-radius:20px;
+                                font-size:12px;
+                                font-weight:600;
+                                margin-bottom:10px;
+                            ">
+
+                            <i class="fas fa-map-location-dot"></i>
+
+                            EXTERNAL LISTING
+
+                        </div>
+
+
+                        <h3>
+                            ${hotel.name}
+                        </h3>
+
+
+                        <p class="hotel-location">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            ${hotel.location}
+
+                        </p>
+
+
+                        <p class="hotel-description">
+
+                            ${
+                                hotel.description ||
+                                "Hotel listing found near your location."
+                            }
+
+                        </p>
+
+
+                        <div
+                            class="hotel-availability"
+                            style="color:#0d856d;">
+
+                            <i class="fas fa-map-marker-alt"></i>
+
+                            External hotel listing
+
+                        </div>
+
+
+                        <div class="hotel-bottom">
+
+                            <div class="hotel-price">
+
+                                <strong>
+                                    Price unavailable
+                                </strong>
+
+                            </div>
+
+
+                            <button
+                                class="book-btn"
+                                onclick='window.open("${mapUrl}", "_blank")'>
+
+                                <i class="fas fa-location-dot"></i>
+
+                                View Location
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                externalContainer.appendChild(card);
+
+            });
+
+        }
+
+
+        /* ================= SCROLL ================= */
+
+        document
+            .getElementById("hotels")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        hotelContainer.innerHTML = `
+
+            <div class="error-message">
+
+                <i class="fas fa-triangle-exclamation"></i>
+
+                <h3>
+                    Connection Error
+                </h3>
+
+                <p>
+                    Make sure Django is running on
+                    port 8000.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   OPEN BOOKING PAGE
+============================================================ */
+
+function openBooking(url) {
+
+    window.location.href = url;
+
+}
+
+
+/* ============================================================
+   LOAD MY BOOKINGS
+============================================================ */
+
+async function loadBookings() {
+
+    const bookingsList =
+        document.getElementById("bookingsList");
+
+
+    /* ========================================================
+       GET CURRENT CUSTOMER EMAIL
+    ======================================================== */
+
+    const currentEmail =
+        localStorage.getItem("bondDeskCustomerEmail");
+
+
+    if (!currentEmail) {
+
+        bookingsList.innerHTML = `
+
+            <div class="empty-bookings">
+
+                <i class="fas fa-user-lock"></i>
+
+                <h3>
+                    Please login first
+                </h3>
+
+                <p>
+                    Login to view your bookings.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="explore-btn">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    try {
+
+        /* ====================================================
+           SEND CUSTOMER EMAIL TO DJANGO
+        ==================================================== */
+
+        const apiUrl =
+            "http://127.0.0.1:8000/api/bookings/?email="
+            + encodeURIComponent(currentEmail);
+
+
+        const response =
+            await fetch(apiUrl);
+
+
+        if (!response.ok) {
+
+            const errorData =
+                await response.json()
+                .catch(() => ({}));
+
+
+            throw new Error(
+                errorData.error ||
+                "Failed to load bookings."
+            );
+
+        }
+
+
+        const bookings =
+            await response.json();
+
+
+        /* ================= NO BOOKINGS ================= */
+
+        if (
+            !Array.isArray(bookings) ||
+            bookings.length === 0
+        ) {
+
+            bookingsList.innerHTML = `
+
+                <div class="empty-bookings">
+
+                    <i class="fas fa-calendar-xmark"></i>
+
+                    <h3>
+                        No bookings yet
+                    </h3>
+
+                    <p>
+                        Your confirmed hotel bookings
+                        will appear here.
+                    </p>
+
+                    <a
+                        href="#hotels"
+                        class="explore-btn">
+
+                        Explore Hotels
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* ================= DISPLAY BOOKINGS ================= */
+
+        bookingsList.innerHTML =
+            bookings.map(function(booking) {
+
+                return `
+
+                    <div class="booking-card">
+
+
+                        <!-- BOOKING HEADER -->
+
+                        <div class="booking-card-header">
+
+                            <div>
+
+                                <h3>
+                                    ${booking.hotel_name}
+                                </h3>
+
+                                <p>
+
+                                    <i class="fas fa-location-dot"></i>
+
+                                    ${booking.hotel_location}
+
+                                </p>
+
+                            </div>
+
+
+                            <span class="booking-status">
+
+                                <i class="fas fa-circle-check"></i>
+
+                                Confirmed
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- BOOKING DETAILS -->
+
+                        <div class="booking-details">
+
+
+                            <div class="booking-detail-item">
+
+                                <i class="fas fa-calendar-check"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Check-in
+                                    </strong>
+
+                                    <span>
+                                        ${booking.check_in}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="booking-detail-item">
+
+                                <i class="fas fa-calendar-xmark"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Check-out
+                                    </strong>
+
+                                    <span>
+                                        ${booking.check_out}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="booking-detail-item">
+
+                                <i class="fas fa-users"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Guests
+                                    </strong>
+
+                                    <span>
+                                        ${booking.guests}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="booking-detail-item">
+
+                                <i class="fas fa-door-open"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Rooms
+                                    </strong>
+
+                                    <span>
+                                        ${booking.rooms}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="booking-detail-item">
+
+                                <i class="fas fa-indian-rupee-sign"></i>
+
+                                <div>
+
+                                    <strong>
+                                        Total Amount
+                                    </strong>
+
+                                    <span>
+                                        ₹${booking.total_amount}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOOKING FOOTER -->
+
+                        <div class="booking-footer">
+
+                            <span>
+
+                                <i class="fas fa-receipt"></i>
+
+                                Booking ID:
+
+                                <strong>
+                                    #${booking.id}
+                                </strong>
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fas fa-clock"></i>
+
+                                Booked on:
+
+                                ${booking.created_at}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Booking loading error:",
+            error
+        );
+
+
+        bookingsList.innerHTML = `
+
+            <div class="empty-bookings">
+
+                <i class="fas fa-triangle-exclamation"></i>
+
+                <h3>
+                    Unable to load bookings
+                </h3>
+
+                <p>
+                    ${error.message}
+                </p>
+
+                <button
+                    class="explore-btn"
+                    onclick="loadBookings()">
+
+                    <i class="fas fa-refresh"></i>
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logoutCustomer() {
+
+    localStorage.removeItem(
+        "bondDeskLoggedIn"
+    );
+
+    localStorage.removeItem(
+        "bondDeskCustomerEmail"
+    );
+
+    localStorage.removeItem(
+        "bondDeskRememberMe"
+    );
+
+}
+
+
+/* ============================================================
+   DATE VALIDATION + INITIAL LOAD
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const checkIn =
+            document.getElementById(
+                "dashboardCheckIn"
+            );
+
+
+        const checkOut =
+            document.getElementById(
+                "dashboardCheckOut"
+            );
+
+
+        /* ================= TODAY ================= */
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        if (checkIn) {
+
+            checkIn.min = today;
+
+        }
+
+
+        if (checkOut) {
+
+            checkOut.min = today;
+
+        }
+
+
+        /* ================= CHECK-IN CHANGE ================= */
+
+        if (
+            checkIn &&
+            checkOut
+        ) {
+
+            checkIn.addEventListener(
+                "change",
+                function() {
+
+                    if (checkIn.value) {
+
+                        checkOut.min =
+                            checkIn.value;
+
+                    }
+
+
+                    if (
+                        checkOut.value &&
+                        checkOut.value <=
+                        checkIn.value
+                    ) {
+
+                        checkOut.value = "";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ================= ENTER KEY ================= */
+
+        const locationInput =
+            document.getElementById(
+                "dashboardLocation"
+            );
+
+
+        if (locationInput) {
+
+            locationInput.addEventListener(
+                "keypress",
+                function(event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        searchDashboardHotels();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ================= LOAD BOOKINGS ================= */
+
+        loadBookings();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

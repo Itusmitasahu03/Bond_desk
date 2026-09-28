@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bond_Desk | Hotel Admin</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .admin-btn {
+            border: none;
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #0b1f33;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #173b5d;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+        .hotel-id {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .admin-stats {
+            margin-bottom: 35px;
+        }
+
+        .admin-stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            text-align: center;
+        }
+
+        .admin-stat-card i {
+            font-size: 28px;
+            color: #d4a84f;
+            margin-bottom: 10px;
+        }
+
+        .admin-stat-card h3 {
+            font-size: 28px;
+            margin: 0;
+            color: #0b1f33;
+        }
+
+        .admin-stat-card p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+
+        .edit-mode {
+            border: 2px solid #d4a84f;
+        }
+
+        .cancel-edit-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="dashboard-navbar">
+
+    <div class="dashboard-logo">
+        <i class="fas fa-hotel"></i>
+        Bond_<span>Desk</span>
+    </div>
+
+    <div class="dashboard-nav-links">
+
+        <a href="../index.html">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+
+        <a href="../dashboard.html">
+            <i class="fas fa-hotel"></i>
+            Customer View
+        </a>
+
+        <a href="../login.html" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HEADER ================= -->
+
+<section class="dashboard-hero">
+
+    <div class="dashboard-hero-overlay">
+
+        <div class="dashboard-hero-content">
+
+            <p class="hero-small-title">
+                HOTEL MANAGEMENT
+            </p>
+
+            <h1>
+                Hotel Admin<br>
+                Dashboard
+            </h1>
+
+            <p>
+                Manage your hotels, rooms and hotel information from one place.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ADMIN CONTENT ================= -->
+
+<section class="dashboard-hotels">
+
+    <div class="container">
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="admin-stats">
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="admin-stat-card">
+
+                        <i class="fas fa-hotel"></i>
+
+                        <h3 id="totalHotels">
+                            0
+                        </h3>
+
+                        <p>
+                            Total Hotels
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="admin-stat-card">
+
+                        <i class="fas fa-door-open"></i>
+
+                        <h3 id="totalRooms">
+                            0
+                        </h3>
+
+                        <p>
+                            Available Rooms
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="admin-stat-card">
+
+                        <i class="fas fa-star"></i>
+
+                        <h3 id="averageRating">
+                            0
+                        </h3>
+
+                        <p>
+                            Average Rating
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= ADD / EDIT HOTEL ================= -->
+
+        <div class="dashboard-section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    MANAGEMENT
+                </p>
+
+                <h2 id="formTitle">
+                    Add New Hotel
+                </h2>
+
+                <p>
+                    Add or update hotel information on Bond_Desk.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-form-card" id="hotelFormCard">
+
+            <form id="hotelForm">
+
+                <input
+                    type="hidden"
+                    id="editingHotelId"
+                    value=""
+                >
+
+
+                <div class="row g-4">
+
+                    <!-- HOTEL NAME -->
+
+                    <div class="col-md-6">
+
+                        <label>
+                            Hotel Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hotelName"
+                            placeholder="Enter hotel name"
+                            required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="col-md-6">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hotelLocation"
+                            placeholder="Example: Cuttack, Odisha"
+                            required>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="col-md-4">
+
+                        <label>
+                            Price per Night
+                        </label>
+
+                        <input
+                            type="number"
+                            id="hotelPrice"
+                            placeholder="2499"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="col-md-4">
+
+                        <label>
+                            Contact Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hotelPhone"
+                            placeholder="9876543210"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+
+                    <!-- ROOMS -->
+
+                    <div class="col-md-4">
+
+                        <label>
+                            Available Rooms
+                        </label>
+
+                        <input
+                            type="number"
+                            id="hotelRooms"
+                            placeholder="20"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+                    <!-- RATING -->
+
+                    <div class="col-md-4">
+
+                        <label>
+                            Rating
+                        </label>
+
+                        <input
+                            type="number"
+                            id="hotelRating"
+                            placeholder="4.5"
+                            min="0"
+                            max="5"
+                            step="0.1"
+                            value="4.0"
+                            required>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="col-md-8">
+
+                        <label>
+                            Image URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="hotelImage"
+                            placeholder="https://images.unsplash.com/..."
+                            required>
+
+                    </div>
+
+
+                    <!-- AMENITIES -->
+
+                    <div class="col-12">
+
+                        <label>
+                            Amenities
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hotelAmenities"
+                            placeholder="WiFi, Parking, AC, Restaurant">
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="col-12">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            id="hotelDescription"
+                            rows="4"
+                            placeholder="Describe your hotel..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="col-12">
+
+                        <button
+                            type="submit"
+                            id="submitButton"
+                            class="dashboard-search-btn">
+
+                            <i class="fas fa-plus"></i>
+
+                            Add Hotel
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="cancelEditButton"
+                            class="cancel-edit-btn"
+                            style="display:none;">
+
+                            <i class="fas fa-times"></i>
+
+                            Cancel Edit
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <div
+                id="formMessage"
+                class="alert form-message">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MANAGED HOTELS ================= -->
+
+<section class="dashboard-hotels">
+
+    <div class="container">
+
+        <div class="dashboard-section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    DATABASE
+                </p>
+
+                <h2>
+                    Your Hotels
+                </h2>
+
+                <p>
+                    View, edit or remove hotels from your database.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="adminHotelResults"
+            class="hotel-grid">
+
+            <div class="loading-message">
+
+                <i class="fas fa-spinner fa-spin"></i>
+
+                <p>
+                    Loading hotels...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const API_URL =
+    "http://127.0.0.1:8000/api";
+
+
+let allHotels = [];
+
+
+// =====================================================
+// LOAD HOTELS
+// =====================================================
+
+async function loadHotels() {
+
+    const container =
+        document.getElementById(
+            "adminHotelResults"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL + "/search/"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load hotels."
+            );
+
+        }
+
+
+        const hotels =
+            await response.json();
+
+
+        allHotels =
+            hotels;
+
+
+        updateStatistics(
+            hotels
+        );
+
+
+        container.innerHTML = "";
+
+
+        if (
+            hotels.length === 0
+        ) {
+
+            container.innerHTML = `
+
+                <div class="initial-message">
+
+                    <i class="fas fa-hotel"></i>
+
+                    <h3>
+                        No hotels added yet
+                    </h3>
+
+                    <p>
+                        Add your first hotel above.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        hotels.forEach(
+            function(hotel) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "hotel-result";
+
+
+                card.innerHTML = `
+
+                    <div class="hotel-image-container">
+
+                        <img
+                            src="${hotel.image_url}"
+                            alt="${hotel.name}"
+                        >
+
+                        <div class="hotel-rating">
+
+                            <i class="fas fa-star"></i>
+
+                            ${hotel.rating}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hotel-result-content">
+
+                        <div class="hotel-id">
+
+                            Hotel ID:
+                            ${hotel.id}
+
+                        </div>
+
+
+                        <h3>
+                            ${hotel.name}
+                        </h3>
+
+
+                        <p class="hotel-location">
+
+                            <i class="fas fa-location-dot"></i>
+
+                            ${hotel.location}
+
+                        </p>
+
+
+                        <p>
+                            ${hotel.description || "No description available."}
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                ₹${Number(hotel.price).toLocaleString("en-IN")}
+                            </strong>
+
+                            / night
+
+                        </p>
+
+
+                        <p>
+
+                            <i class="fas fa-door-open"></i>
+
+                            ${hotel.available_rooms}
+                            rooms available
+
+                        </p>
+
+
+                        <p>
+
+                            <i class="fas fa-phone"></i>
+
+                            ${hotel.phone}
+
+                        </p>
+
+
+                        <p>
+
+                            <i class="fas fa-list"></i>
+
+                            ${hotel.amenities || "No amenities listed"}
+
+                        </p>
+
+
+                        <div class="admin-actions">
+
+                            <button
+                                class="admin-btn edit-btn"
+                                onclick="editHotel(${hotel.id})">
+
+                                <i class="fas fa-edit"></i>
+
+                                Edit
+
+                            </button>
+
+
+                            <button
+                                class="admin-btn delete-btn"
+                                onclick="deleteHotel(${hotel.id}, '${escapeForJs(hotel.name)}')">
+
+                                <i class="fas fa-trash"></i>
+
+                                Delete
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+            <div class="error-message">
+
+                <h3>
+                    Unable to load hotels
+                </h3>
+
+                <p>
+                    Make sure Django is running.
+                </p>
+
+                <button
+                    class="btn btn-dark mt-2"
+                    onclick="loadHotels()">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// =====================================================
+// UPDATE STATISTICS
+// =====================================================
+
+function updateStatistics(
+    hotels
+) {
+
+    document.getElementById(
+        "totalHotels"
+    ).textContent =
+        hotels.length;
+
+
+    let totalRooms = 0;
+
+    let totalRating = 0;
+
+
+    hotels.forEach(
+        function(hotel) {
+
+            totalRooms +=
+                Number(
+                    hotel.available_rooms || 0
+                );
+
+
+            totalRating +=
+                Number(
+                    hotel.rating || 0
+                );
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalRooms"
+    ).textContent =
+        totalRooms;
+
+
+    const average =
+        hotels.length > 0
+            ? totalRating / hotels.length
+            : 0;
+
+
+    document.getElementById(
+        "averageRating"
+    ).textContent =
+        average.toFixed(1);
+
+}
+
+
+// =====================================================
+// EDIT HOTEL
+// =====================================================
+
+function editHotel(
+    hotelId
+) {
+
+    const hotel =
+        allHotels.find(
+            function(item) {
+
+                return Number(item.id) ===
+                    Number(hotelId);
+
+            }
+        );
+
+
+    if (!hotel) {
+
+        alert(
+            "Hotel information not found."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editingHotelId"
+    ).value =
+        hotel.id;
+
+
+    document.getElementById(
+        "hotelName"
+    ).value =
+        hotel.name || "";
+
+
+    document.getElementById(
+        "hotelLocation"
+    ).value =
+        hotel.location || "";
+
+
+    document.getElementById(
+        "hotelPrice"
+    ).value =
+        hotel.price || "";
+
+
+    document.getElementById(
+        "hotelPhone"
+    ).value =
+        hotel.phone || "";
+
+
+    document.getElementById(
+        "hotelRooms"
+    ).value =
+        hotel.available_rooms || 0;
+
+
+    document.getElementById(
+        "hotelRating"
+    ).value =
+        hotel.rating || 4.0;
+
+
+    document.getElementById(
+        "hotelImage"
+    ).value =
+        hotel.image_url || "";
+
+
+    document.getElementById(
+        "hotelAmenities"
+    ).value =
+        hotel.amenities || "";
+
+
+    document.getElementById(
+        "hotelDescription"
+    ).value =
+        hotel.description || "";
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Edit Hotel";
+
+
+    document.getElementById(
+        "submitButton"
+    ).innerHTML = `
+
+        <i class="fas fa-save"></i>
+
+        Update Hotel
+
+    `;
+
+
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
+        "inline-block";
+
+
+    document.getElementById(
+        "hotelFormCard"
+    ).classList.add(
+        "edit-mode"
+    );
+
+
+    window.scrollTo({
+        top: 650,
+        behavior: "smooth"
+    });
+
+}
+
+
+// =====================================================
+// CANCEL EDIT
+// =====================================================
+
+document
+    .getElementById(
+        "cancelEditButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            resetForm();
+
+        }
+    );
+
+
+// =====================================================
+// RESET FORM
+// =====================================================
+
+function resetForm() {
+
+    document
+        .getElementById(
+            "hotelForm"
+        )
+        .reset();
+
+
+    document.getElementById(
+        "editingHotelId"
+    ).value = "";
+
+
+    document.getElementById(
+        "hotelRating"
+    ).value =
+        "4.0";
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Add New Hotel";
+
+
+    document.getElementById(
+        "submitButton"
+    ).innerHTML = `
+
+        <i class="fas fa-plus"></i>
+
+        Add Hotel
+
+    `;
+
+
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "hotelFormCard"
+    ).classList.remove(
+        "edit-mode"
+    );
+
+}
+
+
+// =====================================================
+// ADD / UPDATE HOTEL
+// =====================================================
+
+document
+    .getElementById(
+        "hotelForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const editingId =
+                document.getElementById(
+                    "editingHotelId"
+                ).value;
+
+
+            const hotelData = {
+
+                name:
+                    document
+                    .getElementById(
+                        "hotelName"
+                    )
+                    .value
+                    .trim(),
+
+                location:
+                    document
+                    .getElementById(
+                        "hotelLocation"
+                    )
+                    .value
+                    .trim(),
+
+                price:
+                    document
+                    .getElementById(
+                        "hotelPrice"
+                    )
+                    .value,
+
+                phone:
+                    document
+                    .getElementById(
+                        "hotelPhone"
+                    )
+                    .value
+                    .trim(),
+
+                available_rooms:
+                    document
+                    .getElementById(
+                        "hotelRooms"
+                    )
+                    .value,
+
+                rating:
+                    document
+                    .getElementById(
+                        "hotelRating"
+                    )
+                    .value,
+
+                image_url:
+                    document
+                    .getElementById(
+                        "hotelImage"
+                    )
+                    .value
+                    .trim(),
+
+                amenities:
+                    document
+                    .getElementById(
+                        "hotelAmenities"
+                    )
+                    .value
+                    .trim(),
+
+                description:
+                    document
+                    .getElementById(
+                        "hotelDescription"
+                    )
+                    .value
+                    .trim()
+
+            };
+
+
+            const submitButton =
+                document.getElementById(
+                    "submitButton"
+                );
+
+
+            submitButton.disabled =
+                true;
+
+
+            submitButton.innerHTML = `
+
+                <span
+                    class="spinner-border spinner-border-sm me-2">
+                </span>
+
+                Saving...
+
+            `;
+
+
+            try {
+
+                let url =
+                    API_URL + "/add/";
+
+
+                let method =
+                    "POST";
+
+
+                if (editingId) {
+
+                    url =
+                        API_URL +
+                        "/update/" +
+                        editingId +
+                        "/";
+
+                    method =
+                        "PUT";
+
+                }
+
+
+                const response =
+                    await fetch(
+                        url,
+                        {
+                            method: method,
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    hotelData
+                                )
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.error ||
+                        "Unable to save hotel."
+                    );
+
+                }
+
+
+                if (editingId) {
+
+                    alert(
+                        "Hotel updated successfully!"
+                    );
+
+                } else {
+
+                    alert(
+                        "Hotel added successfully!"
+                    );
+
+                }
+
+
+                resetForm();
+
+                loadHotels();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                alert(
+                    "Unable to save hotel.\n\n" +
+                    error.message
+                );
+
+            }
+
+            finally {
+
+                submitButton.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+// =====================================================
+// DELETE HOTEL
+// =====================================================
+
+async function deleteHotel(
+    hotelId,
+    hotelName
+) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete:\n\n" +
+            hotelName +
+            "\n\nThis action cannot be undone."
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "/delete/" +
+                hotelId +
+                "/",
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.error ||
+                "Unable to delete hotel."
+            );
+
+        }
+
+
+        alert(
+            "Hotel deleted successfully!"
+        );
+
+
+        loadHotels();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            "Unable to delete hotel.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// ESCAPE TEXT FOR BUTTON
+// =====================================================
+
+function escapeForJs(
+    text
+) {
+
+    return String(text || "")
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        );
+
+}
+
+
+// =====================================================
+// INITIAL LOAD
+// =====================================================
+
+loadHotels();
+
+</script>
+
+</body>
+</html>
