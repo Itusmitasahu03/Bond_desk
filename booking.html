@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Hotel | Bond_Desk</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+
+        .booking-wrapper {
+            padding: 50px 0;
+        }
+
+        .booking-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .hotel-info {
+            background: #0b1f33;
+            color: white;
+            padding: 30px;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hotel-name {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .hotel-location {
+            color: #d4a84f;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .hotel-price {
+            font-size: 25px;
+            font-weight: 700;
+            color: #d4a84f;
+        }
+
+        .booking-form {
+            padding: 35px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #0b1f33;
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px 14px;
+            border-radius: 10px;
+        }
+
+        .summary-box {
+            background: #f7f8fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-row {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 21px;
+            font-weight: 700;
+            color: #0b1f33;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #d4a84f;
+            color: #0b1f33;
+            font-size: 17px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .book-btn:hover {
+            background: #c2963d;
+        }
+
+        .book-btn:disabled {
+            background: #aaa;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .availability {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #198754;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .unavailable {
+            background: #dc3545;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #0b1f33;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #d4a84f;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hotel-info,
+            .booking-form {
+                padding: 25px;
+            }
+
+            .hotel-name {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#0b1f33;">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fa-solid fa-hotel me-2"></i>
+            Bond_Desk
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">
+                        Hotels
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html#bookings">
+                        My Bookings
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html#profile">
+                        Profile
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- MAIN -->
+<div class="container booking-wrapper">
+
+    <a href="dashboard.html" class="back-link">
+        <i class="fa-solid fa-arrow-left me-2"></i>
+        Back to Hotels
+    </a>
+
+    <div id="loading" class="loading">
+        <div class="spinner-border text-warning"></div>
+        <p class="mt-3">Loading hotel details...</p>
+    </div>
+
+
+    <div id="bookingContainer" class="booking-card mt-4" style="display:none;">
+
+        <div class="row g-0">
+
+            <!-- HOTEL INFORMATION -->
+            <div class="col-lg-5">
+
+                <div class="hotel-info h-100">
+
+                    <img
+                        id="hotelImage"
+                        class="hotel-image"
+                        src=""
+                        alt="Hotel"
+                    >
+
+                    <div class="hotel-name" id="hotelName">
+                        Hotel Name
+                    </div>
+
+                    <div class="hotel-location">
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        <span id="hotelLocation"></span>
+                    </div>
+
+                    <p id="hotelDescription">
+                        Hotel description
+                    </p>
+
+                    <div class="hotel-price">
+                        ₹<span id="hotelPrice">0</span>
+                        <small style="font-size:14px;color:white;">
+                            / night
+                        </small>
+                    </div>
+
+                    <div class="mt-3">
+                        <span id="availabilityStatus" class="availability">
+                            Checking availability...
+                        </span>
+                    </div>
+
+                    <div class="mt-4">
+
+                        <strong>
+                            <i class="fa-solid fa-phone me-2"></i>
+                            Contact
+                        </strong>
+
+                        <div id="hotelPhone" class="mt-1">
+                            -
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+
+                        <strong>
+                            <i class="fa-solid fa-star me-2"></i>
+                            Rating
+                        </strong>
+
+                        <div class="mt-1">
+                            <span id="hotelRating">
+                                -
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+
+                        <strong>
+                            <i class="fa-solid fa-list me-2"></i>
+                            Amenities
+                        </strong>
+
+                        <div id="hotelAmenities" class="mt-2">
+                            -
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOKING FORM -->
+            <div class="col-lg-7">
+
+                <div class="booking-form">
+
+                    <h3 class="section-title">
+                        <i class="fa-solid fa-calendar-check me-2"></i>
+                        Complete Your Booking
+                    </h3>
+
+
+                    <form id="bookingForm">
+
+                        <!-- CUSTOMER NAME -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- EMAIL -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="customerEmail"
+                                    class="form-control"
+                                    readonly
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- PHONE -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    class="form-control"
+                                    placeholder="Enter phone number"
+                                    maxlength="10"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- CHECK IN -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check-in
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="checkIn"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- CHECK OUT -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Check-out
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="checkOut"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- GUESTS -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Guests
+                                </label>
+
+                                <select id="guests" class="form-select">
+
+                                    <option value="1">
+                                        1 Guest
+                                    </option>
+
+                                    <option value="2" selected>
+                                        2 Guests
+                                    </option>
+
+                                    <option value="3">
+                                        3 Guests
+                                    </option>
+
+                                    <option value="4">
+                                        4 Guests
+                                    </option>
+
+                                    <option value="5">
+                                        5 Guests
+                                    </option>
+
+                                    <option value="6">
+                                        6 Guests
+                                    </option>
+
+                                    <option value="7">
+                                        7 Guests
+                                    </option>
+
+                                    <option value="8">
+                                        8 Guests
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- ROOMS -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Rooms
+                                </label>
+
+                                <select id="rooms" class="form-select">
+
+                                    <option value="1" selected>
+                                        1 Room
+                                    </option>
+
+                                    <option value="2">
+                                        2 Rooms
+                                    </option>
+
+                                    <option value="3">
+                                        3 Rooms
+                                    </option>
+
+                                    <option value="4">
+                                        4 Rooms
+                                    </option>
+
+                                    <option value="5">
+                                        5 Rooms
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SUMMARY -->
+                        <div class="summary-box">
+
+                            <h5 class="fw-bold mb-3">
+                                Booking Summary
+                            </h5>
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Price per night
+                                </span>
+
+                                <strong>
+                                    ₹<span id="summaryPrice">
+                                        0
+                                    </span>
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Number of nights
+                                </span>
+
+                                <strong id="numberOfNights">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Rooms
+                                </span>
+
+                                <strong id="summaryRooms">
+                                    1
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row total-row">
+
+                                <span>
+                                    Total Amount
+                                </span>
+
+                                <strong>
+                                    ₹<span id="totalAmount">
+                                        0
+                                    </span>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOOK BUTTON -->
+                        <button
+                            type="submit"
+                            id="bookButton"
+                            class="book-btn"
+                        >
+                            <i class="fa-solid fa-check me-2"></i>
+                            Confirm Booking
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // ==========================================
+    // LOGIN CHECK
+    // ==========================================
+
+    const loggedIn =
+        localStorage.getItem("bondDeskLoggedIn");
+
+    const loggedInEmail =
+        localStorage.getItem("bondDeskCustomerEmail");
+
+
+    if (
+        loggedIn !== "true" ||
+        !loggedInEmail
+    ) {
+
+        alert("Please login before making a booking.");
+
+        window.location.href = "login.html";
+
+    }
+
+
+    // ==========================================
+    // GET URL PARAMETERS
+    // ==========================================
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const hotelId =
+        urlParams.get("id");
+
+    const urlCheckIn =
+        urlParams.get("check_in");
+
+    const urlCheckOut =
+        urlParams.get("check_out");
+
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const loading =
+        document.getElementById("loading");
+
+    const bookingContainer =
+        document.getElementById("bookingContainer");
+
+    const bookingForm =
+        document.getElementById("bookingForm");
+
+    const hotelName =
+        document.getElementById("hotelName");
+
+    const hotelLocation =
+        document.getElementById("hotelLocation");
+
+    const hotelImage =
+        document.getElementById("hotelImage");
+
+    const hotelPrice =
+        document.getElementById("hotelPrice");
+
+    const hotelPhone =
+        document.getElementById("hotelPhone");
+
+    const hotelRating =
+        document.getElementById("hotelRating");
+
+    const hotelAmenities =
+        document.getElementById("hotelAmenities");
+
+    const hotelDescription =
+        document.getElementById("hotelDescription");
+
+    const availabilityStatus =
+        document.getElementById("availabilityStatus");
+
+    const customerEmail =
+        document.getElementById("customerEmail");
+
+    const checkIn =
+        document.getElementById("checkIn");
+
+    const checkOut =
+        document.getElementById("checkOut");
+
+    const guests =
+        document.getElementById("guests");
+
+    const rooms =
+        document.getElementById("rooms");
+
+    const bookButton =
+        document.getElementById("bookButton");
+
+
+    // ==========================================
+    // SET CUSTOMER EMAIL
+    // ==========================================
+
+    customerEmail.value =
+        loggedInEmail;
+
+
+    // ==========================================
+    // SET DATE FROM URL
+    // ==========================================
+
+    if (urlCheckIn) {
+        checkIn.value = urlCheckIn;
+    }
+
+    if (urlCheckOut) {
+        checkOut.value = urlCheckOut;
+    }
+
+
+    // ==========================================
+    // MINIMUM DATE = TODAY
+    // ==========================================
+
+    const today =
+        new Date().toISOString().split("T")[0];
+
+    checkIn.min = today;
+    checkOut.min = today;
+
+
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    let currentHotel = null;
+    let currentAvailableRooms = 0;
+
+
+    // ==========================================
+    // LOAD HOTEL DETAILS
+    // ==========================================
+
+    async function loadHotel() {
+
+        if (!hotelId) {
+
+            alert("Hotel information is missing.");
+
+            window.location.href =
+                "dashboard.html";
+
+            return;
+
+        }
+
+
+        try {
+
+            let apiUrl =
+                "https://bond-desk-1.onrender.com/api/hotel/"
+                + hotelId
+                + "/";
+
+
+            if (checkIn.value) {
+
+                apiUrl +=
+                    "?check_in="
+                    + encodeURIComponent(checkIn.value);
+
+            }
+
+
+            if (checkOut.value) {
+
+                apiUrl +=
+                    checkIn.value
+                        ? "&check_out="
+                        : "?check_out=";
+
+                apiUrl +=
+                    encodeURIComponent(checkOut.value);
+
+            }
+
+
+            const response =
+                await fetch(apiUrl);
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to load hotel."
+                );
+
+            }
+
+
+            currentHotel =
+                data;
+
+
+            // HOTEL INFORMATION
+
+            hotelName.textContent =
+                data.name || "Hotel";
+
+            hotelLocation.textContent =
+                data.location || "Location unavailable";
+
+            hotelPrice.textContent =
+                Number(data.price || 0).toLocaleString("en-IN");
+
+            hotelPhone.textContent =
+                data.phone || "Not available";
+
+            hotelRating.textContent =
+                data.rating || "Not rated";
+
+            hotelDescription.textContent =
+                data.description ||
+                "Comfortable stay with excellent facilities.";
+
+
+            // IMAGE
+
+            if (data.image_url) {
+
+                hotelImage.src =
+                    data.image_url;
+
+            } else {
+
+                hotelImage.src =
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80";
+
+            }
+
+
+            // AMENITIES
+
+            if (data.amenities) {
+
+                const amenities =
+                    data.amenities
+                    .split(",")
+                    .map(item => item.trim())
+                    .filter(item => item !== "");
+
+                hotelAmenities.innerHTML =
+                    amenities.map(item => `
+                        <span class="badge bg-secondary me-1 mb-1">
+                            ${item}
+                        </span>
+                    `).join("");
+
+            } else {
+
+                hotelAmenities.textContent =
+                    "Standard facilities";
+
+            }
+
+
+            // AVAILABLE ROOMS
+
+            currentAvailableRooms =
+                Number(
+                    data.available_rooms || 0
+                );
+
+
+            updateAvailability(
+                currentAvailableRooms
+            );
+
+
+            updateSummary();
+
+
+            loading.style.display =
+                "none";
+
+            bookingContainer.style.display =
+                "block";
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            loading.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Unable to load hotel.</strong>
+                    <br>
+                    ${error.message}
+                    <br><br>
+                    <button
+                        class="btn btn-dark"
+                        onclick="window.location.href='dashboard.html'"
+                    >
+                        Back to Hotels
+                    </button>
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    // ==========================================
+    // AVAILABILITY DISPLAY
+    // ==========================================
+
+    function updateAvailability(availableRooms) {
+
+        const requestedRooms =
+            Number(rooms.value || 1);
+
+
+        if (availableRooms <= 0) {
+
+            availabilityStatus.textContent =
+                "No rooms available";
+
+            availabilityStatus.classList.add(
+                "unavailable"
+            );
+
+            bookButton.disabled = true;
+
+            return;
+
+        }
+
+
+        if (requestedRooms > availableRooms) {
+
+            availabilityStatus.textContent =
+                availableRooms +
+                " room(s) available";
+
+            availabilityStatus.classList.add(
+                "unavailable"
+            );
+
+            bookButton.disabled = true;
+
+            return;
+
+        }
+
+
+        availabilityStatus.textContent =
+            availableRooms +
+            " room(s) available";
+
+        availabilityStatus.classList.remove(
+            "unavailable"
+        );
+
+        bookButton.disabled = false;
+
+    }
+
+
+    // ==========================================
+    // CALCULATE NIGHTS
+    // ==========================================
+
+    function calculateNights() {
+
+        if (
+            !checkIn.value ||
+            !checkOut.value
+        ) {
+
+            return 0;
+
+        }
+
+
+        const start =
+            new Date(checkIn.value);
+
+        const end =
+            new Date(checkOut.value);
+
+
+        const difference =
+            end - start;
+
+
+        const nights =
+            Math.ceil(
+                difference /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        return nights > 0
+            ? nights
+            : 0;
+
+    }
+
+
+    // ==========================================
+    // UPDATE SUMMARY
+    // ==========================================
+
+    function updateSummary() {
+
+        const price =
+            Number(
+                currentHotel?.price || 0
+            );
+
+
+        const nights =
+            calculateNights();
+
+
+        const selectedRooms =
+            Number(rooms.value || 1);
+
+
+        const total =
+            price *
+            nights *
+            selectedRooms;
+
+
+        document.getElementById(
+            "summaryPrice"
+        ).textContent =
+            price.toLocaleString("en-IN");
+
+
+        document.getElementById(
+            "numberOfNights"
+        ).textContent =
+            nights;
+
+
+        document.getElementById(
+            "summaryRooms"
+        ).textContent =
+            selectedRooms;
+
+
+        document.getElementById(
+            "totalAmount"
+        ).textContent =
+            total.toLocaleString("en-IN");
+
+
+        if (currentHotel) {
+
+            updateAvailability(
+                currentAvailableRooms
+            );
+
+        }
+
+    }
+
+
+    // ==========================================
+    // DATE VALIDATION
+    // ==========================================
+
+    checkIn.addEventListener(
+        "change",
+        function () {
+
+            if (checkIn.value) {
+
+                checkOut.min =
+                    checkIn.value;
+
+            }
+
+
+            if (
+                checkOut.value &&
+                checkOut.value <= checkIn.value
+            ) {
+
+                checkOut.value = "";
+
+            }
+
+
+            updateSummary();
+
+        }
+    );
+
+
+    checkOut.addEventListener(
+        "change",
+        function () {
+
+            updateSummary();
+
+        }
+    );
+
+
+    rooms.addEventListener(
+        "change",
+        function () {
+
+            updateSummary();
+
+        }
+    );
+
+
+    guests.addEventListener(
+        "change",
+        function () {
+
+            updateSummary();
+
+        }
+    );
+
+
+    // ==========================================
+    // PHONE VALIDATION
+    // ==========================================
+
+    document
+        .getElementById("customerPhone")
+        .addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+            }
+        );
+
+
+    // ==========================================
+    // FORM SUBMIT
+    // ==========================================
+
+    bookingForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "customerName"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "customerPhone"
+                ).value.trim();
+
+
+            const selectedGuests =
+                Number(guests.value);
+
+
+            const selectedRooms =
+                Number(rooms.value);
+
+
+            // NAME VALIDATION
+
+            if (!name) {
+
+                alert(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            // PHONE VALIDATION
+
+            if (
+                phone.length !== 10 ||
+                !/^[0-9]+$/.test(phone)
+            ) {
+
+                alert(
+                    "Please enter a valid 10-digit phone number."
+                );
+
+                return;
+
+            }
+
+
+            // DATE VALIDATION
+
+            if (!checkIn.value) {
+
+                alert(
+                    "Please select check-in date."
+                );
+
+                return;
+
+            }
+
+
+            if (!checkOut.value) {
+
+                alert(
+                    "Please select check-out date."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                checkIn.value < today
+            ) {
+
+                alert(
+                    "Check-in date cannot be in the past."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                checkOut.value <= checkIn.value
+            ) {
+
+                alert(
+                    "Check-out date must be after check-in date."
+                );
+
+                return;
+
+            }
+
+
+            // ROOM VALIDATION
+
+            if (selectedRooms <= 0) {
+
+                alert(
+                    "Please select at least one room."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                selectedRooms >
+                currentAvailableRooms
+            ) {
+
+                alert(
+                    "Only " +
+                    currentAvailableRooms +
+                    " room(s) are available."
+                );
+
+                return;
+
+            }
+
+
+            const nights =
+                calculateNights();
+
+
+            if (nights <= 0) {
+
+                alert(
+                    "Please select valid dates."
+                );
+
+                return;
+
+            }
+
+
+            const totalAmount =
+                Number(currentHotel.price) *
+                nights *
+                selectedRooms;
+
+
+            // CONFIRMATION
+
+            const confirmed =
+                confirm(
+                    "Confirm your booking?\n\n" +
+                    "Hotel: " +
+                    currentHotel.name +
+                    "\n" +
+                    "Check-in: " +
+                    checkIn.value +
+                    "\n" +
+                    "Check-out: " +
+                    checkOut.value +
+                    "\n" +
+                    "Rooms: " +
+                    selectedRooms +
+                    "\n" +
+                    "Guests: " +
+                    selectedGuests +
+                    "\n" +
+                    "Total: ₹" +
+                    totalAmount.toLocaleString("en-IN")
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            // DISABLE BUTTON
+
+            bookButton.disabled = true;
+
+            bookButton.innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Confirming Booking...
+            `;
+
+
+            try {
+
+                // ==========================================
+                // RECHECK AVAILABILITY
+                // ==========================================
+
+                const detailResponse =
+                    await fetch(
+                        "https://bond-desk-1.onrender.com/api/hotel/"
+                        + hotelId
+                        + "/?check_in="
+                        + encodeURIComponent(checkIn.value)
+                        + "&check_out="
+                        + encodeURIComponent(checkOut.value)
+                    );
+
+
+                const latestHotel =
+                    await detailResponse.json();
+
+
+                if (!detailResponse.ok) {
+
+                    throw new Error(
+                        latestHotel.error ||
+                        "Unable to verify availability."
+                    );
+
+                }
+
+
+                const latestAvailableRooms =
+                    Number(
+                        latestHotel.available_rooms || 0
+                    );
+
+
+                if (
+                    selectedRooms >
+                    latestAvailableRooms
+                ) {
+
+                    alert(
+                        "Sorry, only " +
+                        latestAvailableRooms +
+                        " room(s) are currently available for these dates."
+                    );
+
+                    currentAvailableRooms =
+                        latestAvailableRooms;
+
+                    updateAvailability(
+                        latestAvailableRooms
+                    );
+
+                    bookButton.innerHTML = `
+                        <i class="fa-solid fa-check me-2"></i>
+                        Confirm Booking
+                    `;
+
+                    return;
+
+                }
+
+
+                // ==========================================
+                // CREATE BOOKING
+                // ==========================================
+
+                const bookingData = {
+
+                    hotel_id:
+                        Number(hotelId),
+
+                    customer_name:
+                        name,
+
+                    customer_email:
+                        loggedInEmail,
+
+                    customer_phone:
+                        phone,
+
+                    guests:
+                        selectedGuests,
+
+                    rooms:
+                        selectedRooms,
+
+                    check_in:
+                        checkIn.value,
+
+                    check_out:
+                        checkOut.value,
+
+                    total_amount:
+                        totalAmount
+
+                };
+
+
+                const response =
+                    await fetch(
+                        "https://bond-desk-1.onrender.com/api/book/",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    bookingData
+                                )
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.error ||
+                        "Booking failed."
+                    );
+
+                }
+
+
+                // ==========================================
+                // SUCCESS
+                // ==========================================
+
+                alert(
+                    "Booking successful!\n\n" +
+                    "Hotel: " +
+                    currentHotel.name +
+                    "\n" +
+                    "Booking ID: " +
+                    (
+                        result.booking_id ||
+                        "Generated"
+                    ) +
+                    "\n" +
+                    "Total Amount: ₹" +
+                    totalAmount.toLocaleString("en-IN")
+                );
+
+
+                window.location.href =
+                    "dashboard.html#bookings";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Booking error:",
+                    error
+                );
+
+
+                alert(
+                    "Booking failed.\n\n" +
+                    error.message
+                );
+
+
+                bookButton.disabled = false;
+
+                bookButton.innerHTML = `
+                    <i class="fa-solid fa-check me-2"></i>
+                    Confirm Booking
+                `;
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // INITIAL LOAD
+    // ==========================================
+
+    loadHotel();
+
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+</html>

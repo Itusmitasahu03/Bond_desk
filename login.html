@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bond_Desk | Login</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="register-navbar">
+
+        <a href="index.html" class="register-logo">
+
+            <i class="fa-solid fa-hotel"></i>
+
+            Bond<span>_Desk</span>
+
+        </a>
+
+
+        <a href="index.html" class="back-home">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Home
+
+        </a>
+
+    </nav>
+
+
+    <!-- ================= LOGIN CONTAINER ================= -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+
+            <!-- ================= HEADING ================= -->
+
+            <div class="login-heading">
+
+                <div class="login-icon">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                </div>
+
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+
+                <p>
+                    Login to your Bond_Desk account
+                    and find your perfect stay.
+                </p>
+
+            </div>
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group-custom">
+
+                    <label>
+                        Email Address
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group-custom">
+
+                    <label>
+                        Password
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required>
+
+
+                        <i
+                            class="fa-solid fa-eye password-eye"
+                            onclick="toggleLoginPassword()">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMEMBER / FORGOT -->
+
+                <div class="login-options">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe">
+
+                        Remember me
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        onclick="forgotPassword(); return false;">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    Login
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <div class="login-text">
+
+                Don't have an account?
+
+                <a href="customer.html">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        /* =====================================================
+           SHOW / HIDE PASSWORD
+        ===================================================== */
+
+        function toggleLoginPassword() {
+
+            const password =
+                document.getElementById("loginPassword");
+
+            const icon =
+                document.querySelector(".password-eye");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FORGOT PASSWORD
+        ===================================================== */
+
+        function forgotPassword() {
+
+            alert(
+                "Password recovery will be available after connecting the database."
+            );
+
+        }
+
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const email =
+                        document
+                            .getElementById("loginEmail")
+                            .value
+                            .trim();
+
+
+                    const password =
+                        document
+                            .getElementById("loginPassword")
+                            .value;
+
+
+                    const rememberMe =
+                        document
+                            .getElementById("rememberMe")
+                            .checked;
+
+
+                    /* ================= VALIDATION ================= */
+
+                    if (
+                        email === "" ||
+                        password === ""
+                    ) {
+
+                        alert(
+                            "Please enter your email and password."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =================================================
+                       SAVE LOGGED-IN CUSTOMER
+                    ================================================= */
+
+                    localStorage.setItem(
+                        "bondDeskCustomerEmail",
+                        email
+                    );
+
+
+                    localStorage.setItem(
+                        "bondDeskLoggedIn",
+                        "true"
+                    );
+
+
+                    /* =================================================
+                       REMEMBER ME
+                    ================================================= */
+
+                    if (rememberMe) {
+
+                        localStorage.setItem(
+                            "bondDeskRememberMe",
+                            "true"
+                        );
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "bondDeskRememberMe"
+                        );
+
+                    }
+
+
+                    /* ================= SUCCESS ================= */
+
+                    alert(
+                        "Login successful!"
+                    );
+
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }
+            );
+
+
+    </script>
+
+</body>
+
+</html>
