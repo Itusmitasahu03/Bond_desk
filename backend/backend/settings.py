@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-cm7j5f4b((-3dz@3$%yhqu=5dbof$i_r5xxcgg&m+dg4nq=@&o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+     "bond-desk-1.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
