@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
-from .models import Hotel, Booking
+from .models import Hotel, Booking, Job
 
 import json
 import requests
@@ -121,7 +121,9 @@ def search_anywhere(request):
 
     if not location:
         return JsonResponse(
-            {"error": "Please enter a location."},
+            {
+                "error": "Please enter a location."
+            },
             status=400
         )
 
@@ -642,7 +644,6 @@ def update_hotel(request, hotel_id):
             request.body
         )
 
-        # Update fields only when supplied
         hotel.name = data.get(
             "name",
             hotel.name
@@ -775,8 +776,6 @@ def delete_hotel(request, hotel_id):
             id=hotel_id
         )
 
-        # Do not delete a hotel if it has bookings.
-        # This protects existing customer booking records.
         booking_count = Booking.objects.filter(
             hotel=hotel
         ).count()
@@ -1245,3 +1244,321 @@ def get_bookings(request):
         data,
         safe=False
     )
+
+
+# ============================================================
+# SEARCH JOBS - LOCATION WISE
+# ============================================================
+
+def search_jobs(request):
+
+    search = request.GET.get(
+        "search",
+        ""
+    ).strip()
+
+    location = request.GET.get(
+        "location",
+        ""
+    ).strip()
+
+    job_type = request.GET.get(
+        "type",
+        ""
+    ).strip()
+
+    jobs = Job.objects.all()
+
+    # --------------------------------------------------------
+    # SEARCH BY KEYWORD
+    # --------------------------------------------------------
+
+    if search:
+
+        jobs = jobs.filter(
+            Q(title__icontains=search)
+            | Q(company__icontains=search)
+            | Q(location__icontains=search)
+            | Q(job_type__icontains=search)
+            | Q(work_mode__icontains=search)
+            | Q(skills__icontains=search)
+            | Q(description__icontains=search)
+        )
+
+    # --------------------------------------------------------
+    # LOCATION-WISE SEARCH
+    # --------------------------------------------------------
+
+    if location:
+
+        words = [
+            word.strip()
+            for word in location.replace(",", " ").split()
+            if len(word.strip()) >= 2
+        ]
+
+        for word in words:
+
+            jobs = jobs.filter(
+                Q(location__icontains=word)
+                | Q(title__icontains=word)
+                | Q(company__icontains=word)
+            )
+
+    # --------------------------------------------------------
+    # JOB TYPE FILTER
+    # --------------------------------------------------------
+
+    if job_type:
+
+        jobs = jobs.filter(
+            job_type__iexact=job_type
+        )
+
+    # --------------------------------------------------------
+    # RESPONSE
+    # --------------------------------------------------------
+
+    data = []
+
+    for job in jobs.order_by("-created_at"):
+
+        data.append({
+
+            "id":
+                job.id,
+
+            "title":
+                job.title,
+
+            "company":
+                job.company,
+
+            "location":
+                job.location,
+
+            "job_type":
+                job.job_type,
+
+            "work_mode":
+                job.work_mode,
+
+            "salary":
+                job.salary,
+
+            "skills":
+                job.skills,
+
+            "description":
+                job.description,
+
+            "application_link":
+                job.application_link,
+
+            "created_at":
+                job.created_at.strftime(
+                    "%d %b %Y"
+                )
+        })
+
+    return JsonResponse(
+        data,
+        safe=False
+    )
+
+
+# ============================================================
+# JOB DETAILS
+# ============================================================
+
+def job_detail(request, job_id):
+
+    job = get_object_or_404(
+        Job,
+        id=job_id
+    )
+
+    return JsonResponse({
+
+        "id":
+            job.id,
+
+        "title":
+            job.title,
+
+        "company":
+            job.company,
+
+        "location":
+            job.location,
+
+        "job_type":
+            job.job_type,
+
+        "work_mode":
+            job.work_mode,
+
+        "salary":
+            job.salary,
+
+        "skills":
+            job.skills,
+
+        "description":
+            job.description,
+
+        "application_link":
+            job.application_link,
+
+        "created_at":
+            job.created_at.strftime(
+                "%d %b %Y"
+            )
+    })
+
+
+# ============================================================
+# ADD JOB
+# ============================================================
+
+@csrf_exempt
+def add_job(request):
+
+    if request.method != "POST":
+
+        return JsonResponse(
+            {
+                "error":
+                    "Only POST requests are allowed."
+            },
+            status=405
+        )
+
+    try:
+
+        data = json.loads(
+            request.body
+        )
+
+        title = data.get(
+            "title",
+            ""
+        ).strip()
+
+        company = data.get(
+            "company",
+            ""
+        ).strip()
+
+        location = data.get(
+            "location",
+            ""
+        ).strip()
+
+        job_type = data.get(
+            "job_type",
+            ""
+        ).strip()
+
+        if not title:
+            return JsonResponse(
+                {
+                    "error":
+                        "Job title is required."
+                },
+                status=400
+            )
+
+        if not company:
+            return JsonResponse(
+                {
+                    "error":
+                        "Company name is required."
+                },
+                status=400
+            )
+
+        if not location:
+            return JsonResponse(
+                {
+                    "error":
+                        "Job location is required."
+                },
+                status=400
+            )
+
+        if not job_type:
+            return JsonResponse(
+                {
+                    "error":
+                        "Job type is required."
+                },
+                status=400
+            )
+
+        job = Job.objects.create(
+
+            title=title,
+
+            company=company,
+
+            location=location,
+
+            job_type=job_type,
+
+            work_mode=data.get(
+                "work_mode",
+                ""
+            ).strip(),
+
+            salary=data.get(
+                "salary",
+                ""
+            ).strip(),
+
+            skills=data.get(
+                "skills",
+                ""
+            ).strip(),
+
+            description=data.get(
+                "description",
+                ""
+            ).strip(),
+
+            application_link=data.get(
+                "application_link",
+                ""
+            ).strip()
+        )
+
+        return JsonResponse(
+            {
+                "message":
+                    "Job added successfully.",
+
+                "job_id":
+                    job.id
+            },
+            status=201
+        )
+
+    except json.JSONDecodeError:
+
+        return JsonResponse(
+            {
+                "error":
+                    "Invalid JSON data."
+            },
+            status=400
+        )
+
+    except Exception as error:
+
+        return JsonResponse(
+            {
+                "error":
+                    str(error)
+            },
+            status=400
+        )
