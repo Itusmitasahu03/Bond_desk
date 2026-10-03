@@ -79,4 +79,9 @@ urlpatterns = [
         views.add_job,
         name="add_job"
     ),
+    path(
+    "debug-urls/",
+    views.debug_urls,
+    name="debug_urls"
+),
 ]

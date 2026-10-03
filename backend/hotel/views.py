@@ -1562,3 +1562,14 @@ def add_job(request):
             },
             status=400
         )
+def debug_urls(request):
+    from django.urls import get_resolver
+
+    routes = []
+
+    for pattern in get_resolver().url_patterns:
+        routes.append(str(pattern.pattern))
+
+    return JsonResponse({
+        "routes": routes
+    })
