@@ -6,7 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bond_Desk | Hotel Booking</title>
+    <title>Bond_Desk | Spa Centre, Massage & Jobs</title>
+
+    <meta name="description"
+        content="Bond_Desk is a platform to discover spa centres, massage services, online jobs, nearby jobs, work from home jobs, part time jobs and full time jobs.">
+
+    <meta name="keywords"
+        content="Bound, Bond_Desk, Bond Desk, Spa Centre, Massage, Online Job, Nearby Job, Work From Home, Part Time Job, Full Time Job">
+
+    <meta name="robots" content="index, follow">
 
     <!-- Bootstrap -->
     <link
@@ -18,7 +26,7 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- CSS -->
+    <!-- Existing CSS -->
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -33,9 +41,12 @@
 
     <div class="container">
 
-        <a class="navbar-brand" href="#">
-            <i class="fa-solid fa-hotel"></i>
+        <a class="navbar-brand" href="index.html">
+
+            <i class="fa-solid fa-link"></i>
+
             Bond<span>_Desk</span>
+
         </a>
 
 
@@ -55,33 +66,64 @@
             <ul class="navbar-nav ms-auto align-items-center">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+
+                    <a class="nav-link active" href="index.html">
                         Home
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#hotels">
-                        Hotels
+
+                    <a class="nav-link" href="#spa">
+                        Spa Centre
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
+
+                    <a class="nav-link" href="#massage">
+                        Massage
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#jobs">
+                        Jobs
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
                     <a class="nav-link" href="#about">
                         About
                     </a>
+
                 </li>
 
+
                 <li class="nav-item">
+
                     <a class="nav-link" href="#contact">
                         Contact
                     </a>
+
                 </li>
+
 
                 <li class="nav-item ms-lg-3">
 
-                    <a href="customer.html"
-                       class="login-btn">
+                    <a
+                        href="customer.html"
+                        class="login-btn">
 
                         Login / Register
 
@@ -103,8 +145,6 @@
 
 <section class="hero">
 
-    <!-- Online hotel image directly in CSS -->
-
     <div class="hero-overlay"></div>
 
 
@@ -113,22 +153,28 @@
         <div class="hero-text">
 
             <p class="small-title">
-                <i class="fa-solid fa-location-dot"></i>
-                FIND YOUR PERFECT STAY
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                DISCOVER • SEARCH • CONNECT
+
             </p>
 
 
             <h1>
-                Stay Anywhere.<br>
-                <span>Feel Everywhere.</span>
+
+                Find What You Need.<br>
+
+                <span>All In One Place.</span>
+
             </h1>
 
 
             <p class="hero-description">
 
-                Discover comfortable hotels, amazing
-                locations and affordable stays wherever
-                your journey takes you.
+                Discover spa centres, massage services,
+                online jobs, nearby jobs, work from home,
+                part time and full time opportunities.
 
             </p>
 
@@ -136,9 +182,30 @@
 
 
 
-        <!-- ================= SEARCH ================= -->
+        <!-- ================= MAIN SEARCH ================= -->
 
         <div class="search-box">
+
+
+            <!-- SEARCH -->
+
+            <div class="search-item">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <div>
+
+                    <label>Search</label>
+
+                    <input
+                        type="text"
+                        id="mainSearch"
+                        placeholder="Spa Centre, Massage, Online Job...">
+
+                </div>
+
+            </div>
+
 
 
             <!-- LOCATION -->
@@ -162,59 +229,49 @@
 
 
 
-            <!-- CHECK IN -->
+            <!-- CATEGORY -->
 
             <div class="search-item">
 
-                <i class="fa-regular fa-calendar"></i>
+                <i class="fa-solid fa-layer-group"></i>
 
                 <div>
 
-                    <label>Check-in</label>
+                    <label>Category</label>
 
-                    <input type="date">
+                    <select id="categoryInput">
 
-                </div>
+                        <option value="all">
+                            All Services
+                        </option>
 
-            </div>
+                        <option value="spa">
+                            Spa Centre
+                        </option>
 
+                        <option value="massage">
+                            Massage
+                        </option>
 
+                        <option value="online">
+                            Online Job
+                        </option>
 
-            <!-- CHECK OUT -->
+                        <option value="nearby">
+                            Nearby Job
+                        </option>
 
-            <div class="search-item">
+                        <option value="remote">
+                            Work From Home
+                        </option>
 
-                <i class="fa-regular fa-calendar-check"></i>
+                        <option value="part-time">
+                            Part Time Job
+                        </option>
 
-                <div>
-
-                    <label>Check-out</label>
-
-                    <input type="date">
-
-                </div>
-
-            </div>
-
-
-
-            <!-- GUESTS -->
-
-            <div class="search-item">
-
-                <i class="fa-solid fa-users"></i>
-
-                <div>
-
-                    <label>Guests</label>
-
-                    <select>
-
-                        <option>1 Guest</option>
-                        <option>2 Guests</option>
-                        <option>3 Guests</option>
-                        <option>4 Guests</option>
-                        <option>5+ Guests</option>
+                        <option value="full-time">
+                            Full Time Job
+                        </option>
 
                     </select>
 
@@ -228,7 +285,7 @@
 
             <button
                 class="search-btn"
-                onclick="searchHotels()">
+                onclick="searchServices()">
 
                 <i class="fa-solid fa-magnifying-glass"></i>
 
@@ -244,9 +301,9 @@
 
 
 
-<!-- ================= HOTELS ================= -->
+<!-- ================= SPA CENTRE ================= -->
 
-<section class="section" id="hotels">
+<section class="section" id="spa">
 
     <div class="container">
 
@@ -256,11 +313,11 @@
             <div>
 
                 <p class="section-label">
-                    EXPLORE
+                    WELLNESS
                 </p>
 
                 <h2>
-                    Popular Stays
+                    Spa Centre
                 </h2>
 
             </div>
@@ -268,8 +325,8 @@
 
             <p>
 
-                Discover beautiful hotels and
-                comfortable stays at your destination.
+                Discover spa centres and wellness
+                services according to your location.
 
             </p>
 
@@ -280,75 +337,40 @@
         <div class="row g-4">
 
 
-
-            <!-- HOTEL 1 -->
+            <!-- SPA CARD 1 -->
 
             <div class="col-lg-4 col-md-6">
 
-                <div class="hotel-card">
+                <div class="feature-card h-100">
 
+                    <div class="feature-icon">
 
-                    <div class="hotel-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=80"
-                            alt="Luxury Hotel">
-
-                        <span class="rating">
-
-                            <i class="fa-solid fa-star"></i>
-
-                            4.8
-
-                        </span>
+                        <i class="fa-solid fa-spa"></i>
 
                     </div>
 
 
-
-                    <div class="hotel-info">
-
-                        <h3>
-                            Grand Palace Hotel
-                        </h3>
+                    <h3>
+                        Spa Centre
+                    </h3>
 
 
-                        <p class="location">
+                    <p>
 
-                            <i class="fa-solid fa-location-dot"></i>
+                        Find spa centres by location,
+                        services, timings and contact
+                        information.
 
-                            Bhubaneswar, Odisha
-
-                        </p>
-
-
-
-                        <div class="hotel-bottom">
-
-                            <div>
-
-                                <strong>
-                                    ₹2,499
-                                </strong>
-
-                                <small>
-                                    / night
-                                </small>
-
-                            </div>
+                    </p>
 
 
-                            <a
-                                href="dashboard.html"
-                                class="view-btn">
+                    <a
+                        href="spa.html"
+                        class="view-btn">
 
-                                View Hotel
+                        Find Spa Centre
 
-                            </a>
-
-                        </div>
-
-                    </div>
+                    </a>
 
                 </div>
 
@@ -356,75 +378,39 @@
 
 
 
-
-            <!-- HOTEL 2 -->
+            <!-- SPA CARD 2 -->
 
             <div class="col-lg-4 col-md-6">
 
-                <div class="hotel-card">
+                <div class="feature-card h-100">
 
+                    <div class="feature-icon">
 
-                    <div class="hotel-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80"
-                            alt="Luxury Resort">
-
-
-                        <span class="rating">
-
-                            <i class="fa-solid fa-star"></i>
-
-                            4.7
-
-                        </span>
+                        <i class="fa-solid fa-location-dot"></i>
 
                     </div>
 
 
-
-                    <div class="hotel-info">
-
-                        <h3>
-                            Ocean View Resort
-                        </h3>
+                    <h3>
+                        Nearby Spa Centre
+                    </h3>
 
 
-                        <p class="location">
+                    <p>
 
-                            <i class="fa-solid fa-location-dot"></i>
+                        Search for spa centres
+                        available in your city or area.
 
-                            Puri, Odisha
-
-                        </p>
-
-
-                        <div class="hotel-bottom">
-
-                            <div>
-
-                                <strong>
-                                    ₹3,199
-                                </strong>
-
-                                <small>
-                                    / night
-                                </small>
-
-                            </div>
+                    </p>
 
 
-                            <a
-                                href="dashboard.html"
-                                class="view-btn">
+                    <a
+                        href="spa.html?type=nearby"
+                        class="view-btn">
 
-                                View Hotel
+                        Search Nearby
 
-                            </a>
-
-                        </div>
-
-                    </div>
+                    </a>
 
                 </div>
 
@@ -432,75 +418,39 @@
 
 
 
-
-            <!-- HOTEL 3 -->
+            <!-- SPA CARD 3 -->
 
             <div class="col-lg-4 col-md-6">
 
-                <div class="hotel-card">
+                <div class="feature-card h-100">
 
+                    <div class="feature-icon">
 
-                    <div class="hotel-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80"
-                            alt="City Hotel">
-
-
-                        <span class="rating">
-
-                            <i class="fa-solid fa-star"></i>
-
-                            4.6
-
-                        </span>
+                        <i class="fa-solid fa-heart"></i>
 
                     </div>
 
 
-
-                    <div class="hotel-info">
-
-                        <h3>
-                            City Comfort Inn
-                        </h3>
+                    <h3>
+                        Wellness Services
+                    </h3>
 
 
-                        <p class="location">
+                    <p>
 
-                            <i class="fa-solid fa-location-dot"></i>
+                        Explore wellness services and
+                        available service providers.
 
-                            Cuttack, Odisha
-
-                        </p>
-
-
-                        <div class="hotel-bottom">
-
-                            <div>
-
-                                <strong>
-                                    ₹1,899
-                                </strong>
-
-                                <small>
-                                    / night
-                                </small>
-
-                            </div>
+                    </p>
 
 
-                            <a
-                                href="dashboard.html"
-                                class="view-btn">
+                    <a
+                        href="spa.html"
+                        class="view-btn">
 
-                                View Hotel
+                        Explore Services
 
-                            </a>
-
-                        </div>
-
-                    </div>
+                    </a>
 
                 </div>
 
@@ -515,7 +465,374 @@
 
 
 
-<!-- ================= WHY BOND DESK ================= -->
+<!-- ================= MASSAGE ================= -->
+
+<section class="section" id="massage">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    WELLNESS SERVICES
+                </p>
+
+                <h2>
+                    Massage Services
+                </h2>
+
+            </div>
+
+
+            <p>
+
+                Explore massage services and
+                providers by location.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-hands"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Massage
+                    </h3>
+
+
+                    <p>
+
+                        Find massage services,
+                        providers, locations,
+                        timings and service details.
+
+                    </p>
+
+
+                    <a
+                        href="spa.html?service=massage"
+                        class="view-btn">
+
+                        Find Massage
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Massage Near You
+                    </h3>
+
+
+                    <p>
+
+                        Search available massage
+                        services in your preferred
+                        city or area.
+
+                    </p>
+
+
+                    <a
+                        href="spa.html?service=massage"
+                        class="view-btn">
+
+                        Search Massage
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= JOBS ================= -->
+
+<section class="section" id="jobs">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    CAREER OPPORTUNITIES
+                </p>
+
+                <h2>
+                    Find Jobs
+                </h2>
+
+            </div>
+
+
+            <p>
+
+                Search online jobs, nearby jobs,
+                work from home, part time and
+                full time opportunities.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- ONLINE JOB -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-globe"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Online Job
+                    </h3>
+
+
+                    <p>
+
+                        Explore online job opportunities
+                        from different employers.
+
+                    </p>
+
+
+                    <a
+                        href="jobs.html?type=online"
+                        class="view-btn">
+
+                        Find Online Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NEARBY JOB -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Nearby Job
+                    </h3>
+
+
+                    <p>
+
+                        Search job opportunities
+                        according to your location.
+
+                    </p>
+
+
+                    <a
+                        href="jobs.html?type=nearby"
+                        class="view-btn">
+
+                        Find Nearby Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WORK FROM HOME -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-house-laptop"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Work From Home
+                    </h3>
+
+
+                    <p>
+
+                        Explore remote and work from
+                        home job opportunities.
+
+                    </p>
+
+
+                    <a
+                        href="jobs.html?type=remote"
+                        class="view-btn">
+
+                        Work From Home
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PART TIME -->
+
+            <div class="col-lg-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Part Time Job
+                    </h3>
+
+
+                    <p>
+
+                        Find part time employment
+                        opportunities suitable for
+                        different schedules.
+
+                    </p>
+
+
+                    <a
+                        href="jobs.html?type=part-time"
+                        class="view-btn">
+
+                        Find Part Time Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FULL TIME -->
+
+            <div class="col-lg-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Full Time Job
+                    </h3>
+
+
+                    <p>
+
+                        Explore full time employment
+                        opportunities from different
+                        employers.
+
+                    </p>
+
+
+                    <a
+                        href="jobs.html?type=full-time"
+                        class="view-btn">
+
+                        Find Full Time Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
 
 <section class="why-section" id="about">
 
@@ -527,11 +844,11 @@
             <div>
 
                 <p class="section-label">
-                    WHY BOND_DESK
+                    ABOUT BOND_DESK
                 </p>
 
                 <h2>
-                    Everything You Need For A Better Stay
+                    One Place To Discover Services & Opportunities
                 </h2>
 
             </div>
@@ -549,18 +866,21 @@
 
                     <div class="feature-icon">
 
-                        <i class="fa-solid fa-location-dot"></i>
+                        <i class="fa-solid fa-magnifying-glass"></i>
 
                     </div>
 
+
                     <h3>
-                        Search Anywhere
+                        Easy Search
                     </h3>
+
 
                     <p>
 
-                        Search hotels by entering
-                        any city, area or location.
+                        Search services and job
+                        opportunities using keywords
+                        and locations.
 
                     </p>
 
@@ -576,18 +896,21 @@
 
                     <div class="feature-icon">
 
-                        <i class="fa-solid fa-tags"></i>
+                        <i class="fa-solid fa-layer-group"></i>
 
                     </div>
 
+
                     <h3>
-                        Affordable Prices
+                        Multiple Categories
                     </h3>
+
 
                     <p>
 
-                        Find hotels according to
-                        your preferred budget.
+                        Browse spa centres, massage,
+                        online jobs, nearby jobs,
+                        remote, part time and full time jobs.
 
                     </p>
 
@@ -603,18 +926,21 @@
 
                     <div class="feature-icon">
 
-                        <i class="fa-solid fa-shield-halved"></i>
+                        <i class="fa-solid fa-link"></i>
 
                     </div>
 
+
                     <h3>
-                        Easy Booking
+                        Connect
                     </h3>
+
 
                     <p>
 
-                        Check hotel information,
-                        contact details and booking options.
+                        Discover relevant services and
+                        opportunities and connect with
+                        the available provider or employer.
 
                     </p>
 
@@ -631,11 +957,90 @@
 
 
 
+<!-- ================= KEYWORDS / SERVICES ================= -->
+
+<section class="section">
+
+    <div class="container text-center">
+
+
+        <p class="section-label">
+            BOND_DESK
+        </p>
+
+
+        <h2>
+            What Are You Looking For?
+        </h2>
+
+
+        <p class="mt-3">
+
+            Search Bond_Desk for spa centres,
+            massage services and employment
+            opportunities.
+
+        </p>
+
+
+
+        <div class="mt-4">
+
+
+            <span class="badge bg-secondary m-1">
+                Bound
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Spa Centre
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Massage
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Online Job
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Nearby Job
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Work From Home
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Part Time Job
+            </span>
+
+
+            <span class="badge bg-secondary m-1">
+                Full Time Job
+            </span>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
 <!-- ================= FOOTER ================= -->
 
 <footer id="contact">
 
     <div class="container">
+
 
         <div class="footer-content">
 
@@ -644,7 +1049,7 @@
 
                 <h2>
 
-                    <i class="fa-solid fa-hotel"></i>
+                    <i class="fa-solid fa-link"></i>
 
                     Bond_Desk
 
@@ -653,9 +1058,69 @@
 
                 <p>
 
-                    Your desk for discovering
-                    comfortable stays anywhere.
+                    Discover spa centres, massage
+                    services and job opportunities
+                    in one place.
 
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h4>
+                    Services
+                </h4>
+
+
+                <p>
+                    <a href="#spa">
+                        Spa Centre
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#massage">
+                        Massage
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#jobs">
+                        Online Job
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#jobs">
+                        Nearby Job
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#jobs">
+                        Work From Home
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#jobs">
+                        Part Time Job
+                    </a>
+                </p>
+
+
+                <p>
+                    <a href="#jobs">
+                        Full Time Job
+                    </a>
                 </p>
 
             </div>
@@ -692,6 +1157,7 @@
         </div>
 
 
+
         <div class="copyright">
 
             © 2026 Bond_Desk | All Rights Reserved
@@ -707,12 +1173,53 @@
 <!-- JavaScript -->
 
 <script src="script.js"></script>
-3e2
+
 
 <!-- Bootstrap JS -->
 
 <script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+function searchServices() {
+
+    const search =
+        document.getElementById("mainSearch").value.trim();
+
+    const location =
+        document.getElementById("locationInput").value.trim();
+
+    const category =
+        document.getElementById("categoryInput").value;
+
+    let url = "jobs.html";
+
+    if (category === "spa" || category === "massage") {
+        url = "spa.html";
+    }
+
+    const params = new URLSearchParams();
+
+    if (search) {
+        params.set("search", search);
+    }
+
+    if (location) {
+        params.set("location", location);
+    }
+
+    if (category && category !== "all") {
+        params.set("type", category);
+    }
+
+    window.location.href =
+        url + "?" + params.toString();
+
+}
+
 </script>
 
 

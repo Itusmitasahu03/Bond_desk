@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Job, Nearby Job & Work From Home Jobs | Bond_Desk</title>
+
+    <meta name="description"
+          content="Find Online Job, Nearby Job, Work From Home, Part Time Job and Full Time Job opportunities on Bond_Desk. Search jobs by keyword, category and location.">
+
+    <meta name="keywords"
+          content="Online Job, Nearby Job, Work From Home, Part Time Job, Full Time Job, Bond_Desk, Bond Desk, Bound">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical"
+          href="https://bonddesk.netlify.app/jobs.html">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        body {
+            background: #f7f8fc;
+        }
+
+        .job-hero {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            color: white;
+            text-align: center;
+        }
+
+        .job-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .job-hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-box input,
+        .search-box select {
+            height: 50px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card i {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .job-section {
+            padding: 60px 20px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .job-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .job-meta {
+            color: #666;
+            margin: 8px 0;
+        }
+
+        .job-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #eef1ff;
+            margin: 4px;
+            font-size: 13px;
+        }
+
+        .apply-btn {
+            margin-top: 15px;
+        }
+
+        .keyword-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .keyword {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 8px 14px;
+            margin: 5px;
+            border-radius: 20px;
+        }
+
+        .loading-box {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .error-box {
+            background: #fff3f3;
+            border: 1px solid #ffcccc;
+            color: #b00020;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .job-count {
+            font-weight: 600;
+            color: #555;
+        }
+
+        footer {
+            padding: 35px 20px;
+            background: #111827;
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fa-solid fa-link"></i>
+            Bond_Desk
+        </a>
+
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="spa.html">
+                        Spa Centre
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="spa.html">
+                        Massage
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="login.html">
+                        Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="job-hero">
+
+    <div class="container">
+
+        <h1>
+            Online Job & Nearby Job Opportunities
+        </h1>
+
+        <p>
+            Search for Work From Home, Part Time Job and Full Time Job opportunities.
+        </p>
+
+
+        <div class="search-box">
+
+            <div class="row g-3">
+
+
+                <!-- SEARCH -->
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        id="jobSearch"
+                        class="form-control"
+                        placeholder="Search job, developer, data analyst..."
+                    >
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="col-md-3">
+
+                    <input
+                        type="text"
+                        id="jobLocation"
+                        class="form-control"
+                        placeholder="Location e.g. Cuttack"
+                    >
+
+                </div>
+
+
+                <!-- JOB TYPE -->
+
+                <div class="col-md-3">
+
+                    <select
+                        id="jobType"
+                        class="form-select">
+
+                        <option value="">
+                            All Job Types
+                        </option>
+
+                        <option value="Online Job">
+                            Online Job
+                        </option>
+
+                        <option value="Nearby Job">
+                            Nearby Job
+                        </option>
+
+                        <option value="Work From Home">
+                            Work From Home
+                        </option>
+
+                        <option value="Part Time Job">
+                            Part Time Job
+                        </option>
+
+                        <option value="Full Time Job">
+                            Full Time Job
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SEARCH BUTTON -->
+
+                <div class="col-md-2">
+
+                    <button
+                        class="btn btn-primary w-100"
+                        onclick="filterJobs()">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JOB CATEGORIES
+========================================================= -->
+
+<section class="job-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>
+                Find Jobs
+            </h2>
+
+            <p>
+                Explore Online Job, Nearby Job and flexible work opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 justify-content-center">
+
+
+            <!-- ONLINE -->
+
+            <div class="col-md-4 col-lg">
+
+                <div class="category-card"
+                     onclick="selectJobType('Online Job')">
+
+                    <i class="fa-solid fa-laptop"></i>
+
+                    <h5>
+                        Online Job
+                    </h5>
+
+                    <p>
+                        Online work opportunities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NEARBY -->
+
+            <div class="col-md-4 col-lg">
+
+                <div class="category-card"
+                     onclick="selectJobType('Nearby Job')">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <h5>
+                        Nearby Job
+                    </h5>
+
+                    <p>
+                        Find jobs near your location.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WORK FROM HOME -->
+
+            <div class="col-md-4 col-lg">
+
+                <div class="category-card"
+                     onclick="selectJobType('Work From Home')">
+
+                    <i class="fa-solid fa-house-laptop"></i>
+
+                    <h5>
+                        Work From Home
+                    </h5>
+
+                    <p>
+                        Remote work opportunities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PART TIME -->
+
+            <div class="col-md-4 col-lg">
+
+                <div class="category-card"
+                     onclick="selectJobType('Part Time Job')">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <h5>
+                        Part Time Job
+                    </h5>
+
+                    <p>
+                        Flexible part-time work.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FULL TIME -->
+
+            <div class="col-md-4 col-lg">
+
+                <div class="category-card"
+                     onclick="selectJobType('Full Time Job')">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    <h5>
+                        Full Time Job
+                    </h5>
+
+                    <p>
+                        Full-time career opportunities.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JOB LISTINGS
+========================================================= -->
+
+<section class="job-section pt-0">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>
+                Available Job Opportunities
+            </h2>
+
+            <p>
+                Jobs are loaded from the Bond_Desk database.
+            </p>
+
+            <div id="jobCount"
+                 class="job-count">
+            </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div id="loadingJobs"
+             class="loading-box">
+
+            <div class="spinner-border text-primary"
+                 role="status">
+
+            </div>
+
+            <p class="mt-3">
+                Loading available jobs...
+            </p>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div id="jobError"
+             class="error-box"
+             style="display: none;">
+
+            <h5>
+                Unable to load jobs
+            </h5>
+
+            <p id="jobErrorText">
+                Please try again later.
+            </p>
+
+        </div>
+
+
+        <!-- JOB RESULTS -->
+
+        <div id="jobResults"></div>
+
+
+        <!-- NO JOBS -->
+
+        <div id="noJobs"
+             class="text-center"
+             style="display: none; padding: 30px;">
+
+            <h4>
+                No matching jobs found.
+            </h4>
+
+            <p>
+                Try another keyword, job type or location.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SEO / INFORMATION
+========================================================= -->
+
+<section class="job-section">
+
+    <div class="container">
+
+        <div class="keyword-box">
+
+            <h2>
+                Jobs on Bond_Desk
+            </h2>
+
+            <p>
+                Bond_Desk provides a platform for exploring different types
+                of job opportunities including Online Job, Nearby Job,
+                Work From Home, Part Time Job and Full Time Job.
+            </p>
+
+            <p>
+                Users can search for jobs using keywords, job categories
+                and locations.
+            </p>
+
+
+            <h4 class="mt-4">
+                Popular Job Searches
+            </h4>
+
+
+            <span class="keyword">
+                Online Job
+            </span>
+
+            <span class="keyword">
+                Nearby Job
+            </span>
+
+            <span class="keyword">
+                Work From Home
+            </span>
+
+            <span class="keyword">
+                Part Time Job
+            </span>
+
+            <span class="keyword">
+                Full Time Job
+            </span>
+
+            <span class="keyword">
+                Developer Jobs
+            </span>
+
+            <span class="keyword">
+                Data Analyst Jobs
+            </span>
+
+            <span class="keyword">
+                Remote Jobs
+            </span>
+
+            <span class="keyword">
+                Jobs in Cuttack
+            </span>
+
+            <span class="keyword">
+                Jobs in Bhubaneswar
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <h4>
+        Bond_Desk
+    </h4>
+
+    <p>
+        Online Job • Nearby Job • Work From Home • Part Time Job • Full Time Job
+    </p>
+
+    <p>
+        © 2026 Bond_Desk. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /*
+     * Your deployed Django backend
+     */
+    const API_BASE =
+        "https://bond-desk-1.onrender.com";
+
+
+    /*
+     * Load jobs from Django database
+     */
+    async function filterJobs() {
+
+        const search =
+            document.getElementById("jobSearch")
+                .value
+                .trim();
+
+        const location =
+            document.getElementById("jobLocation")
+                .value
+                .trim();
+
+        const type =
+            document.getElementById("jobType")
+                .value
+                .trim();
+
+
+        /*
+         * Show loading
+         */
+
+        document.getElementById(
+            "loadingJobs"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "jobResults"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "noJobs"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "jobError"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "jobCount"
+        ).innerHTML = "";
+
+
+        /*
+         * Build API URL
+         */
+
+        const params =
+            new URLSearchParams();
+
+
+        if (search) {
+
+            params.append(
+                "search",
+                search
+            );
+
+        }
+
+
+        if (location) {
+
+            params.append(
+                "location",
+                location
+            );
+
+        }
+
+
+        if (type) {
+
+            params.append(
+                "type",
+                type
+            );
+
+        }
+
+
+        const apiUrl =
+            `${API_BASE}/api/jobs/?${params.toString()}`;
+
+
+        try {
+
+            const response =
+                await fetch(apiUrl);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server returned an error."
+                );
+
+            }
+
+
+            const jobs =
+                await response.json();
+
+
+            /*
+             * Hide loading
+             */
+
+            document.getElementById(
+                "loadingJobs"
+            ).style.display = "none";
+
+
+            /*
+             * No jobs
+             */
+
+            if (
+                !Array.isArray(jobs) ||
+                jobs.length === 0
+            ) {
+
+                document.getElementById(
+                    "noJobs"
+                ).style.display = "block";
+
+                document.getElementById(
+                    "jobCount"
+                ).innerHTML =
+                    "0 jobs found";
+
+                return;
+
+            }
+
+
+            /*
+             * Job count
+             */
+
+            document.getElementById(
+                "jobCount"
+            ).innerHTML =
+                `${jobs.length} job${jobs.length !== 1 ? "s" : ""} found`;
+
+
+            /*
+             * Display jobs
+             */
+
+            displayJobs(jobs);
+
+
+        } catch (error) {
+
+            console.error(
+                "Job API error:",
+                error
+            );
+
+
+            document.getElementById(
+                "loadingJobs"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "jobError"
+            ).style.display = "block";
+
+
+            document.getElementById(
+                "jobErrorText"
+            ).textContent =
+                "Unable to connect to the job server. Please try again later.";
+
+        }
+
+    }
+
+
+
+    /*
+     * Display database jobs
+     */
+
+    function displayJobs(jobs) {
+
+        const container =
+            document.getElementById(
+                "jobResults"
+            );
+
+
+        container.innerHTML = "";
+
+
+        jobs.forEach(function(job) {
+
+
+            /*
+             * Job type icon
+             */
+
+            let icon =
+                "fa-briefcase";
+
+
+            if (
+                job.job_type ===
+                "Online Job"
+            ) {
+
+                icon =
+                    "fa-laptop";
+
+            } else if (
+                job.job_type ===
+                "Nearby Job"
+            ) {
+
+                icon =
+                    "fa-location-dot";
+
+            } else if (
+                job.job_type ===
+                "Work From Home"
+            ) {
+
+                icon =
+                    "fa-house-laptop";
+
+            } else if (
+                job.job_type ===
+                "Part Time Job"
+            ) {
+
+                icon =
+                    "fa-clock";
+
+            }
+
+
+            /*
+             * Application button
+             */
+
+            let applyButton = "";
+
+
+            if (
+                job.application_link &&
+                job.application_link.trim() !== ""
+            ) {
+
+                applyButton = `
+                    <a
+                        href="${escapeHtml(job.application_link)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-primary apply-btn">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                        Apply Now
+
+                    </a>
+                `;
+
+            } else {
+
+                applyButton = `
+                    <button
+                        class="btn btn-secondary apply-btn"
+                        disabled>
+
+                        Application Link Not Provided
+
+                    </button>
+                `;
+
+            }
+
+
+            /*
+             * Job skills
+             */
+
+            let skillsHTML = "";
+
+
+            if (
+                job.skills &&
+                job.skills.trim() !== ""
+            ) {
+
+                const skills =
+                    job.skills
+                        .split(",");
+
+
+                skills.forEach(function(skill) {
+
+                    if (
+                        skill.trim() !== ""
+                    ) {
+
+                        skillsHTML += `
+                            <span class="job-tag">
+                                ${escapeHtml(skill.trim())}
+                            </span>
+                        `;
+
+                    }
+
+                });
+
+            }
+
+
+            /*
+             * Salary
+             */
+
+            let salaryHTML = "";
+
+
+            if (
+                job.salary &&
+                job.salary.trim() !== ""
+            ) {
+
+                salaryHTML = `
+                    <div class="job-meta">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        ${escapeHtml(job.salary)}
+
+                    </div>
+                `;
+
+            }
+
+
+            /*
+             * Work mode
+             */
+
+            let workModeHTML = "";
+
+
+            if (
+                job.work_mode &&
+                job.work_mode.trim() !== ""
+            ) {
+
+                workModeHTML = `
+                    <div class="job-meta">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        ${escapeHtml(job.work_mode)}
+
+                    </div>
+                `;
+
+            }
+
+
+            /*
+             * Description
+             */
+
+            let descriptionHTML = "";
+
+
+            if (
+                job.description &&
+                job.description.trim() !== ""
+            ) {
+
+                descriptionHTML = `
+                    <p class="mt-3">
+
+                        ${escapeHtml(job.description)}
+
+                    </p>
+                `;
+
+            }
+
+
+            /*
+             * Create card
+             */
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "job-card";
+
+
+            card.innerHTML = `
+
+                <h3>
+
+                    <i class="fa-solid ${icon}"></i>
+
+                    ${escapeHtml(job.title)}
+
+                </h3>
+
+
+                <div class="job-meta">
+
+                    <i class="fa-solid fa-building"></i>
+
+                    <strong>
+                        ${escapeHtml(job.company)}
+                    </strong>
+
+                </div>
+
+
+                <div class="job-meta">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    ${escapeHtml(job.location)}
+
+                </div>
+
+
+                <div class="job-meta">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    ${escapeHtml(job.job_type)}
+
+                </div>
+
+
+                ${workModeHTML}
+
+
+                ${salaryHTML}
+
+
+                ${descriptionHTML}
+
+
+                <div class="mt-2">
+
+                    <span class="job-tag">
+
+                        ${escapeHtml(job.job_type)}
+
+                    </span>
+
+                    ${skillsHTML}
+
+                </div>
+
+
+                <div>
+
+                    ${applyButton}
+
+                </div>
+
+
+                <small class="text-muted d-block mt-3">
+
+                    Posted:
+                    ${escapeHtml(job.created_at)}
+
+                </small>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        });
+
+    }
+
+
+
+    /*
+     * Select job category
+     */
+
+    function selectJobType(type) {
+
+        document.getElementById(
+            "jobType"
+        ).value = type;
+
+
+        filterJobs();
+
+
+        setTimeout(function() {
+
+            document.getElementById(
+                "jobResults"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }, 300);
+
+    }
+
+
+
+    /*
+     * Escape HTML
+     *
+     * Prevents database text from being
+     * interpreted as HTML/JavaScript.
+     */
+
+    function escapeHtml(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    /*
+     * Read parameters from index.html
+     *
+     * Example:
+     * jobs.html?location=Cuttack
+     *
+     * or:
+     * jobs.html?type=Work%20From%20Home
+     */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const searchParam =
+        params.get("search");
+
+
+    const locationParam =
+        params.get("location");
+
+
+    const typeParam =
+        params.get("type");
+
+
+    if (searchParam) {
+
+        document.getElementById(
+            "jobSearch"
+        ).value =
+            searchParam;
+
+    }
+
+
+    if (locationParam) {
+
+        document.getElementById(
+            "jobLocation"
+        ).value =
+            locationParam;
+
+    }
+
+
+    if (typeParam) {
+
+        document.getElementById(
+            "jobType"
+        ).value =
+            typeParam;
+
+    }
+
+
+    /*
+     * Automatically search when
+     * parameters come from index.html
+     */
+
+    filterJobs();
+
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>
